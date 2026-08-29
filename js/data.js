@@ -1,0 +1,770 @@
+/**
+ * WanderAI - Rich Travel Database
+ * Expanded worldwide destinations, stays, transits, hidden gems,
+ * and side-by-side tourist comparison pairs.
+ */
+
+window.WANDER_DATA = {
+  currencies: {
+    INR: { symbol: '₹', rate: 1, name: 'Indian Rupee' },
+    USD: { symbol: '$', rate: 0.012, name: 'US Dollar' },
+    EUR: { symbol: '€', rate: 0.011, name: 'Euro' },
+    GBP: { symbol: '£', rate: 0.0095, name: 'British Pound' },
+    JPY: { symbol: '¥', rate: 1.85, name: 'Japanese Yen' }
+  },
+
+  destinations: [
+    {
+      id: 'kyoto-japan',
+      name: 'Kyoto & Kansai Region',
+      country: 'Japan',
+      tagline: 'Ancient Zen gardens, misty cedar forests & secret teahouses',
+      description: 'Beyond the crowded paths of Gion and Arashiyama lies a timeless world of secluded moss temples, hidden mountain shrines, and private tea ceremonies.',
+      image: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=80',
+      heroImage: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1600&q=85',
+      coordinates: [35.0116, 135.7681],
+      defaultBudgetINR: 125000,
+      bestSeason: 'Spring (Cherry Blossoms) & Autumn (Crimson Maples)',
+      weather: { temp: '19°C', condition: 'Crisp & Sunny', icon: 'cloud-sun' },
+      crowdIndex: 78,
+      hiddenGemCount: 18,
+      tags: ['Culture', 'Photography', 'Food', 'Zen', 'Heritage']
+    },
+    {
+      id: 'pune-india',
+      name: 'Pune & Western Ghats',
+      country: 'India',
+      tagline: 'Misty fortresses, Sahyadri mountain trails & hidden food lanes',
+      description: 'Explore scenic Sahyadri peaks at Sinhagad, quiet monsoon waterfalls in Tamhini Ghat, and the historic cultural heritage of the Maratha kingdom.',
+      image: 'https://images.unsplash.com/photo-1595658658481-d53d3f999875?auto=format&fit=crop&w=1200&q=80',
+      heroImage: 'https://images.unsplash.com/photo-1595658658481-d53d3f999875?auto=format&fit=crop&w=1600&q=85',
+      coordinates: [18.5204, 73.8567],
+      defaultBudgetINR: 28000,
+      bestSeason: 'July to February (Monsoon & Winter)',
+      weather: { temp: '25°C', condition: 'Pleasant Breeze', icon: 'sun' },
+      crowdIndex: 45,
+      hiddenGemCount: 20,
+      tags: ['Culture', 'Heritage', 'Hikes', 'Food', 'Budget']
+    },
+    {
+      id: 'matheran-india',
+      name: 'Matheran Automobile-Free Hill Forest',
+      country: 'India',
+      tagline: 'Asia’s only car-free hill station with red clay paths & valley clouds',
+      description: 'Zero vehicle horns, untouched evergreen red soil trails, panoramic sunrise viewpoints over Sahyadri gorges, and heritage forest lodges.',
+      image: 'https://images.unsplash.com/photo-1589182373726-e4f658ab50f0?auto=format&fit=crop&w=1200&q=80',
+      heroImage: 'https://images.unsplash.com/photo-1589182373726-e4f658ab50f0?auto=format&fit=crop&w=1600&q=85',
+      coordinates: [18.9868, 73.2676],
+      defaultBudgetINR: 18000,
+      bestSeason: 'September to March (Misty & Serene)',
+      weather: { temp: '21°C', condition: 'Misty Alpine', icon: 'cloud' },
+      crowdIndex: 22,
+      hiddenGemCount: 16,
+      tags: ['Nature', 'Offbeat', 'Serenity', 'Forest', 'Romantic']
+    },
+    {
+      id: 'bali-indonesia',
+      name: 'Bali (Sidemen & North Coast)',
+      country: 'Indonesia',
+      tagline: 'Misty emerald valleys, hidden volcanic waterfalls & sacred temples',
+      description: 'Skip the congested tourist strips of Canggu and discover authentic Bali: terraced rice amphitheatres in Sidemen, black sand coves, and secret jungle cascades.',
+      image: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=80',
+      heroImage: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1600&q=85',
+      coordinates: [-8.4095, 115.1889],
+      defaultBudgetINR: 85000,
+      bestSeason: 'May to September (Dry & Sunny)',
+      weather: { temp: '28°C', condition: 'Tropical Breeze', icon: 'sun' },
+      crowdIndex: 65,
+      hiddenGemCount: 24,
+      tags: ['Nature', 'Wellness', 'Adventure', 'Beaches', 'Romantic']
+    },
+    {
+      id: 'paris-france',
+      name: 'Paris & Secret Passages',
+      country: 'France',
+      tagline: 'Historic covered arcades, rooftop bistros & artist ateliers',
+      description: 'Discover the intimate side of Paris: 19th-century glass-roofed passages, quiet courtyards of Le Marais, and sunset vistas from Parc des Buttes-Chaumont.',
+      image: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=80',
+      heroImage: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1600&q=85',
+      coordinates: [48.8566, 2.3522],
+      defaultBudgetINR: 165000,
+      bestSeason: 'April to June & September to November',
+      weather: { temp: '18°C', condition: 'Mild & Sunny', icon: 'sun' },
+      crowdIndex: 88,
+      hiddenGemCount: 25,
+      tags: ['Culture', 'Romantic', 'Food', 'Art', 'Architecture']
+    },
+    {
+      id: 'amalfi-italy',
+      name: 'Amalfi Coast & Ischia',
+      country: 'Italy',
+      tagline: 'Dramatic cliffside villages, lemon groves & tranquil thermal islands',
+      description: 'While Positano swells with tour buses, the cliff paths of Ravello, the silent fjord of Furore, and the thermal springs of volcanic Ischia offer pure Mediterranean romance.',
+      image: 'https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=80',
+      heroImage: 'https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1600&q=85',
+      coordinates: [40.6340, 14.6027],
+      defaultBudgetINR: 175000,
+      bestSeason: 'May to June & September to October',
+      weather: { temp: '24°C', condition: 'Sunny & Warm', icon: 'sun' },
+      crowdIndex: 82,
+      hiddenGemCount: 15,
+      tags: ['Romantic', 'Luxury', 'Food', 'Coastline', 'Photography']
+    },
+    {
+      id: 'swiss-alps',
+      name: 'Swiss Alps & Lauterbrunnen',
+      country: 'Switzerland',
+      tagline: 'Cascading alpine waterfalls, wildflower meadows & glacier vistas',
+      description: 'Escape overcrowded ski resorts for car-free mountain hamlets like Gimmelwald, hidden glacial lakes like Oeschinensee, and panoramic high-altitude trails.',
+      image: 'https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=80',
+      heroImage: 'https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1600&q=85',
+      coordinates: [46.5935, 7.9079],
+      defaultBudgetINR: 210000,
+      bestSeason: 'June to September (Hiking) & Dec to March (Snow)',
+      weather: { temp: '16°C', condition: 'Alpine Sunshine', icon: 'cloud-sun' },
+      crowdIndex: 60,
+      hiddenGemCount: 16,
+      tags: ['Mountains', 'Adventure', 'Nature', 'Scenic Trains', 'Photography']
+    },
+    {
+      id: 'santorini-greece',
+      name: 'Santorini (Pyrgos & Megalochori)',
+      country: 'Greece',
+      tagline: 'Medieval fortress villages, volcanic vineyards & quiet cliff terraces',
+      description: 'Bypass the selfie crowds of Oia by exploring the medieval labyrinth of Pyrgos, traditional bell towers, and sunset caldera dining in Akrotiri.',
+      image: 'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=1200&q=80',
+      heroImage: 'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=1600&q=85',
+      coordinates: [36.3932, 25.4615],
+      defaultBudgetINR: 180000,
+      bestSeason: 'May to October (Sunny Aegean)',
+      weather: { temp: '26°C', condition: 'Aegean Breeze', icon: 'sun' },
+      crowdIndex: 85,
+      hiddenGemCount: 18,
+      tags: ['Romantic', 'Beaches', 'Photography', 'Sunset', 'Wine']
+    },
+    {
+      id: 'rajasthan-india',
+      name: 'Udaipur & Kumbhalgarh',
+      country: 'India',
+      tagline: 'Lakeside royal palaces, majestic hill fortresses & hidden craft alleys',
+      description: 'Discover regal Rajput heritage with private sunset boat rides on Lake Pichola, the second longest wall in the world at Kumbhalgarh, and secluded desert luxury camps.',
+      image: 'https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=1200&q=80',
+      heroImage: 'https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=1600&q=85',
+      coordinates: [24.5854, 73.7125],
+      defaultBudgetINR: 45000,
+      bestSeason: 'October to March (Pleasant Winters)',
+      weather: { temp: '26°C', condition: 'Sunny & Mild', icon: 'sun' },
+      crowdIndex: 55,
+      hiddenGemCount: 22,
+      tags: ['Heritage', 'Royal', 'Culture', 'Food', 'Romantic']
+    },
+    {
+      id: 'cappadocia-turkey',
+      name: 'Cappadocia & Ihlara Valley',
+      country: 'Turkey',
+      tagline: 'Fairy chimneys, sunrise hot air balloons & secret subterranean cities',
+      description: 'Wander deep into the peaceful Ihlara canyon, explore 3,000-year-old rock-carved churches without tourists, and stay in boutique carved cave suites.',
+      image: 'https://images.unsplash.com/photo-1641128324972-af3212f0f6bd?auto=format&fit=crop&w=1200&q=80',
+      heroImage: 'https://images.unsplash.com/photo-1641128324972-af3212f0f6bd?auto=format&fit=crop&w=1600&q=85',
+      coordinates: [38.6431, 34.8289],
+      defaultBudgetINR: 95000,
+      bestSeason: 'April to June & September to November',
+      weather: { temp: '22°C', condition: 'Clear Sky', icon: 'sun' },
+      crowdIndex: 58,
+      hiddenGemCount: 14,
+      tags: ['Adventure', 'Photography', 'History', 'Romantic', 'Unique']
+    },
+    {
+      id: 'goa-india',
+      name: 'South Goa & Secret Coves',
+      country: 'India',
+      tagline: 'Pristine quiet beaches, Portuguese heritage villas & spice plantations',
+      description: 'Leave North Goa rave crowds behind for untouched butterfly beaches, secret river kayaking, ancient spice farms, and authentic Goan-Portuguese gastronomy.',
+      image: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=1200&q=80',
+      heroImage: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=1600&q=85',
+      coordinates: [15.2993, 74.1240],
+      defaultBudgetINR: 35000,
+      bestSeason: 'November to April (Warm & Sunny)',
+      weather: { temp: '30°C', condition: 'Sunny & Coastal', icon: 'sun' },
+      crowdIndex: 48,
+      hiddenGemCount: 20,
+      tags: ['Beaches', 'Relaxation', 'Food', 'Nature', 'Budget']
+    },
+    {
+      id: 'iceland-highlands',
+      name: 'Iceland Highlands & South Coast',
+      country: 'Iceland',
+      tagline: 'Cascading glaciers, geothermal springs & aurora-lit volcanic peaks',
+      description: 'Traverse obsidian black sands, secluded thermal canyons like Reykjadalur, and untouched basalt sea arches under magical midnight sun or northern lights.',
+      image: 'https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1200&q=80',
+      heroImage: 'https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1600&q=85',
+      coordinates: [64.9631, -19.0208],
+      defaultBudgetINR: 195000,
+      bestSeason: 'September to March (Auroras) & June to Aug (Midnight Sun)',
+      weather: { temp: '8°C', condition: 'Chilly & Dramatic', icon: 'cloud-lightning' },
+      crowdIndex: 42,
+      hiddenGemCount: 19,
+      tags: ['Adventure', 'Nature', 'Aurora', 'Offbeat', 'Roadtrip']
+    }
+  ],
+
+  // "Escape the Crowd" AI Comparison Database
+  escapeTheCrowd: [
+    {
+      id: 'etc-kyoto-fushimi',
+      popularSpot: {
+        name: 'Fushimi Inari Shrine (Main Torii Path)',
+        location: 'Kyoto, Japan',
+        crowdLevel: 96,
+        avgWaitTime: '45-60 min for photos',
+        drawback: 'Massive shoulder-to-shoulder tour groups, selfie sticks, noisy crowds during daylight.',
+        image: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=600&q=80'
+      },
+      hiddenAlternative: {
+        name: 'Otagi Nenbutsu-ji & Sagano Bamboo Backpath',
+        location: 'North Arashiyama, Kyoto',
+        crowdLevel: 14,
+        serenityScore: 98,
+        whyBetter: 'Contains 1,200 whimsical moss-covered stone statues carved by Buddhist sculptors. Absolute tranquil forest sounds with 90% fewer visitors.',
+        bestTime: '9:00 AM or 4:00 PM',
+        travelTimeFromCenter: '25 min via JR San-in Line + scenic stroll',
+        estimatedCostINR: 350,
+        uniquenessScore: 9.9,
+        image: 'https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=800&q=80',
+        coordinates: [35.0298, 135.6582]
+      }
+    },
+    {
+      id: 'etc-eiffel-paris',
+      popularSpot: {
+        name: 'Eiffel Tower Trocadéro Viewpoint',
+        location: 'Paris, France',
+        crowdLevel: 97,
+        avgWaitTime: '90+ min entry queue',
+        drawback: 'Massive crowds, aggressive souvenir hawkers, pickpocket alerts, obstructed photo angles.',
+        image: 'https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?auto=format&fit=crop&w=600&q=80'
+      },
+      hiddenAlternative: {
+        name: 'Parc des Buttes-Chaumont & Temple de la Sybille',
+        location: '19th Arrondissement, Paris',
+        crowdLevel: 16,
+        serenityScore: 96,
+        whyBetter: 'A dramatic cliffside English landscape garden with a romantic Roman temple on a 50m rocky island overlooking Parisian rooftops with zero tourists.',
+        bestTime: '5:30 PM - 7:30 PM (Sunset & Local Wine Picnic)',
+        travelTimeFromCenter: '18 min Metro Line 7bis',
+        estimatedCostINR: 0,
+        uniquenessScore: 9.8,
+        image: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=80',
+        coordinates: [48.8809, 2.3828]
+      }
+    },
+    {
+      id: 'etc-lonavala-pune',
+      popularSpot: {
+        name: 'Tiger Point & Bushi Dam Steps',
+        location: 'Lonavala / Khandala, Maharashtra',
+        crowdLevel: 94,
+        avgWaitTime: '2-hour weekend bumper traffic',
+        drawback: 'Overcommercialized snack stalls, severe traffic jams, loud car stereos during monsoon.',
+        image: 'https://images.unsplash.com/photo-1595658658481-d53d3f999875?auto=format&fit=crop&w=600&q=80'
+      },
+      hiddenAlternative: {
+        name: 'Charlotte Lake & King George Point in Matheran',
+        location: 'Matheran Eco Forest, Maharashtra',
+        crowdLevel: 15,
+        serenityScore: 97,
+        whyBetter: 'Completely car-free mountain lake surrounded by dense red soil woods and cascading dam streams where only horse hoofs and bird calls are heard.',
+        bestTime: '8:00 AM - 11:00 AM (Fog rolling across water)',
+        travelTimeFromCenter: 'Neral toy train or horseback trail',
+        estimatedCostINR: 100,
+        uniquenessScore: 9.7,
+        image: 'https://images.unsplash.com/photo-1589182373726-e4f658ab50f0?auto=format&fit=crop&w=800&q=80',
+        coordinates: [18.9868, 73.2676]
+      }
+    },
+    {
+      id: 'etc-taj-mahal',
+      popularSpot: {
+        name: 'Taj Mahal Main Gate & Courtyard',
+        location: 'Agra, India',
+        crowdLevel: 98,
+        avgWaitTime: '90 min security queue',
+        drawback: 'Heavy congestion, persistent touts, restricted viewpoints during midday heat.',
+        image: 'https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=600&q=80'
+      },
+      hiddenAlternative: {
+        name: 'Mehtab Bagh Moonlight Garden & Kachhpura Heritage Walk',
+        location: 'Opposite Yamuna Bank, Agra',
+        crowdLevel: 18,
+        serenityScore: 95,
+        whyBetter: 'Perfect unobstructed symmetrical reflection of the marble mausoleum across the river with zero security queues and stunning sunset glow.',
+        bestTime: '5:15 PM - 6:30 PM (Golden Hour)',
+        travelTimeFromCenter: '15 min via auto-rickshaw across the bridge',
+        estimatedCostINR: 250,
+        uniquenessScore: 9.7,
+        image: 'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=800&q=80',
+        coordinates: [27.1798, 78.0421]
+      }
+    },
+    {
+      id: 'etc-oia-santorini',
+      popularSpot: {
+        name: 'Oia Castle Sunset Lookout',
+        location: 'Oia, Santorini, Greece',
+        crowdLevel: 98,
+        avgWaitTime: '2 hours waiting for a standing spot',
+        drawback: 'Overcrowded alleys, selfie stick walls, inflated cocktail prices.',
+        image: 'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=600&q=80'
+      },
+      hiddenAlternative: {
+        name: 'Pyrgos Venetian Castle & Monastery of Profitis Ilias',
+        location: 'Pyrgos Kallistis, Santorini',
+        crowdLevel: 12,
+        serenityScore: 99,
+        whyBetter: 'Highest mountain peak in Santorini with 360-degree sunset view across the entire island, vineyard valleys, and Aegean sea in total peaceful quiet.',
+        bestTime: '6:00 PM - 7:45 PM',
+        travelTimeFromCenter: '15 min local bus or scooter from Fira',
+        estimatedCostINR: 0,
+        uniquenessScore: 9.9,
+        image: 'https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=800&q=80',
+        coordinates: [36.3632, 25.4498]
+      }
+    }
+  ],
+
+  // Hidden Gems Directory
+  hiddenGems: [
+    {
+      id: 'gem-matheran-1',
+      name: 'Charlotte Lake & Louisa Point Vista',
+      destinationId: 'matheran-india',
+      location: 'Matheran Hill Forest, Maharashtra, India',
+      category: 'Nature',
+      filterTags: ['Nature', 'Offbeat', 'Romantic', 'Photography', 'Budget'],
+      image: 'https://images.unsplash.com/photo-1589182373726-e4f658ab50f0?auto=format&fit=crop&w=800&q=80',
+      crowdLevel: 15,
+      uniquenessScore: 9.8,
+      estimatedCostINR: 100,
+      bestTime: 'Early Morning 7:30 AM (Forest mist)',
+      travelTime: '15 min scenic stroll from Matheran bazaar',
+      coordinates: [18.9868, 73.2676],
+      whyAiRecommends: 'Untouched freshwater reservoir framed by ancient evergreen forest where automobile sounds are strictly forbidden.',
+      insiderTip: 'Walk further along the trail to Louisa Point for views of Prabalgad and Kalavantin Durg.'
+    },
+    {
+      id: 'gem-1',
+      name: 'Otagi Nenbutsu-ji Temple',
+      destinationId: 'kyoto-japan',
+      location: 'Sagano, Kyoto, Japan',
+      category: 'Culture',
+      filterTags: ['Culture', 'Photography', 'Offbeat', 'Nature'],
+      image: 'https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=800&q=80',
+      crowdLevel: 14,
+      uniquenessScore: 9.9,
+      estimatedCostINR: 300,
+      bestTime: 'Early Morning (9:00 AM)',
+      travelTime: '25 min from Kyoto Station',
+      coordinates: [35.0298, 135.6582],
+      whyAiRecommends: '1,200 unique stone Buddhist figures, each with distinct quirky expressions, surrounded by lush bamboo canopies.',
+      insiderTip: 'Visit the small upper moss garden where the wind chime resonates with the mountain breeze.'
+    },
+    {
+      id: 'gem-paris-1',
+      name: 'Passage des Panoramas & Secret Courtyards',
+      destinationId: 'paris-france',
+      location: '2nd Arrondissement, Paris, France',
+      category: 'Culture',
+      filterTags: ['Culture', 'Food', 'Romantic', 'Photography'],
+      image: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=80',
+      crowdLevel: 22,
+      uniquenessScore: 9.7,
+      estimatedCostINR: 450,
+      bestTime: '3:00 PM - 5:30 PM',
+      travelTime: 'Direct Grands Boulevards Metro',
+      coordinates: [48.8715, 2.3418],
+      whyAiRecommends: 'Built in 1799, Paris’s first glass-covered shopping arcade housing antique stamp shops and cozy wine bistros.',
+      insiderTip: 'Stop at the artisan gyoza bar inside for a delightful fusion snack.'
+    },
+    {
+      id: 'gem-2',
+      name: 'Gembleng Natural Infinity Rock Pools',
+      destinationId: 'bali-indonesia',
+      location: 'Sidemen, Karangasem, Bali',
+      category: 'Nature',
+      filterTags: ['Nature', 'Adventure', 'Romantic', 'Photography'],
+      image: 'https://images.unsplash.com/photo-1555400038-63f5ba517a47?auto=format&fit=crop&w=800&q=80',
+      crowdLevel: 16,
+      uniquenessScore: 9.8,
+      estimatedCostINR: 150,
+      bestTime: '7:00 AM - 9:30 AM',
+      travelTime: '1 hour from Ubud',
+      coordinates: [-8.4842, 115.4468],
+      whyAiRecommends: 'Natural tiered stone jacuzzi pools high on a cliff edge with clear mountain water looking across lush jungle.',
+      insiderTip: 'Bring reef shoes and a dry bag for camera gear as the rock trail is slightly slippery.'
+    },
+    {
+      id: 'gem-3',
+      name: 'Kumbhalgarh Great Wall Sunset Vista',
+      destinationId: 'rajasthan-india',
+      location: 'Rajsamand, Rajasthan, India',
+      category: 'Culture',
+      filterTags: ['Culture', 'Adventure', 'Romantic', 'Photography'],
+      image: 'https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=800&q=80',
+      crowdLevel: 25,
+      uniquenessScore: 9.7,
+      estimatedCostINR: 350,
+      bestTime: '4:30 PM - 6:30 PM',
+      travelTime: '1.5 hours scenic drive from Udaipur',
+      coordinates: [25.1479, 73.5872],
+      whyAiRecommends: 'The second longest continuous wall on Earth (36 km), snaking across the Aravalli peaks with breathtaking vistas.',
+      insiderTip: 'Climb to Badal Mahal for cloud-level sunset reflections.'
+    },
+    {
+      id: 'gem-4',
+      name: 'Fiordo di Furore Hidden Sea-Gorge',
+      destinationId: 'amalfi-italy',
+      location: 'Furore, Amalfi Coast, Italy',
+      category: 'Romantic',
+      filterTags: ['Romantic', 'Nature', 'Photography', 'Beaches'],
+      image: 'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=800&q=80',
+      crowdLevel: 22,
+      uniquenessScore: 9.8,
+      estimatedCostINR: 0,
+      bestTime: '9:00 AM (Before afternoon shade)',
+      travelTime: '15 min bus from Amalfi port',
+      coordinates: [40.6186, 14.5492],
+      whyAiRecommends: 'One of the Mediterranean’s only natural fjords with a suspension arched bridge 30m above turquoise water.',
+      insiderTip: 'Pack water shoes as the beach consists of smooth pebbles.'
+    },
+    {
+      id: 'gem-5',
+      name: 'Oeschinensee Secret Alpine Trail',
+      destinationId: 'swiss-alps',
+      location: 'Kandersteg, Bernese Oberland, Switzerland',
+      category: 'Nature',
+      filterTags: ['Nature', 'Adventure', 'Photography', 'Offbeat'],
+      image: 'https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=800&q=80',
+      crowdLevel: 28,
+      uniquenessScore: 9.9,
+      estimatedCostINR: 1800,
+      bestTime: 'Early Morning (8:30 AM)',
+      travelTime: '45 min train from Interlaken',
+      coordinates: [46.4988, 7.7289],
+      whyAiRecommends: 'A deep turquoise glacial lake enclosed by 3,000m vertical cliffs with wooden rowboats.',
+      insiderTip: 'Take panoramic trail #8 rather than the lakefront path for mindblowing aerial views.'
+    },
+    {
+      id: 'gem-6',
+      name: 'Kakolem & Butterfly Beach Secret Cove',
+      destinationId: 'goa-india',
+      location: 'Canacona, South Goa, India',
+      category: 'Beaches',
+      filterTags: ['Beaches', 'Romantic', 'Nature', 'Offbeat', 'Budget'],
+      image: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=800&q=80',
+      crowdLevel: 12,
+      uniquenessScore: 9.6,
+      estimatedCostINR: 500,
+      bestTime: '3:30 PM - 7:00 PM',
+      travelTime: '40 min from Margao',
+      coordinates: [15.0210, 73.9856],
+      whyAiRecommends: 'Tucked between coconut hills with a freshwater stream cascading directly onto golden sands.',
+      insiderTip: 'Access is easiest by hiring a local fisherman boat from Palolem Beach.'
+    }
+  ],
+
+  // Hotels & Stays
+  hotels: [
+    {
+      id: 'hotel-matheran-1',
+      destinationId: 'matheran-india',
+      name: 'The Byke Heritage 1854 Eco Forest Resort',
+      type: 'Colonial Heritage Forest Lodge',
+      rating: 4.88,
+      reviewsCount: 320,
+      pricePerNightINR: 5400,
+      image: 'https://images.unsplash.com/photo-1589182373726-e4f658ab50f0?auto=format&fit=crop&w=800&q=80',
+      location: 'Wooded Ridge, Matheran Hill Forest',
+      coordinates: [18.9868, 73.2676],
+      distanceFromCenter: 'Car-free evergreen forest zone',
+      amenities: ['100% Pure Vegetarian Kitchen', 'Outdoor Forest Swimming Pool', 'Free Ayurvedic Tea', 'Direct Trail Access'],
+      crowdScore: 'Whisper Quiet (96% Serenity)',
+      cancellation: 'Free cancellation up to 48 hours prior',
+      tag: 'Pure Forest Peace'
+    },
+    {
+      id: 'hotel-pune-1',
+      destinationId: 'pune-india',
+      name: 'The Corinthians Heritage Resort & Club',
+      type: 'Egyptian-Greco Architecture Sanctuary',
+      rating: 4.86,
+      reviewsCount: 450,
+      pricePerNightINR: 7200,
+      image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80',
+      location: 'Undri Hills, South Pune',
+      coordinates: [18.4552, 73.9142],
+      distanceFromCenter: '25 min from Koregaon Park',
+      amenities: ['First 1st Microbrewery in Pune', 'Luxury Spa Suites', 'Infinity Pool', 'Free High-Speed Wi-Fi'],
+      crowdScore: 'Relaxed Hill Oasis (88% Serenity)',
+      cancellation: 'Free cancellation up to 24h prior',
+      tag: 'Resort Getaway'
+    },
+    {
+      id: 'hotel-kyoto-1',
+      destinationId: 'kyoto-japan',
+      name: 'Sora Machiya Heritage Ryokan',
+      type: 'Traditional Machiya Ryokan',
+      rating: 4.94,
+      reviewsCount: 382,
+      pricePerNightINR: 14500,
+      image: 'https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=800&q=80',
+      location: 'Higashiyama Quiet Quarter, Kyoto',
+      coordinates: [34.9982, 135.7785],
+      distanceFromCenter: '1.2 km from Gion',
+      amenities: ['Hinoki Cedar Wood Bath', 'Organic Kaiseki Breakfast', 'High-Speed Wi-Fi', 'Zen Garden View', 'Free Cancellation'],
+      crowdScore: 'Very Peaceful (92% Serenity)',
+      cancellation: 'Free cancellation up to 48 hours before check-in',
+      tag: 'AI Top Pick'
+    },
+    {
+      id: 'hotel-paris-1',
+      destinationId: 'paris-france',
+      name: 'Hôtel Particulier Montmartre Secret Garden',
+      type: 'Boutique Garden Mansion',
+      rating: 4.95,
+      reviewsCount: 280,
+      pricePerNightINR: 32000,
+      image: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=80',
+      location: 'Montmartre Secret Passage, Paris',
+      coordinates: [48.8872, 2.3365],
+      distanceFromCenter: 'Hidden inside private cobblestone alley',
+      amenities: ['Private Botanical Garden', 'Cocktail Speakeasy Bar', 'French Breakfast in Bed', 'Air Conditioning'],
+      crowdScore: 'Secret Oasis (95% Serenity)',
+      cancellation: 'Free cancellation up to 3 days prior',
+      tag: 'Most Romantic Stay'
+    },
+    {
+      id: 'hotel-bali-1',
+      destinationId: 'bali-indonesia',
+      name: 'Wapa di Ume Sidemen Eco-Resort',
+      type: 'Luxury Eco-Boutique Villa',
+      rating: 4.92,
+      reviewsCount: 420,
+      pricePerNightINR: 11200,
+      image: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80',
+      location: 'Undan River Valley, Sidemen, Bali',
+      coordinates: [-8.4812, 115.4412],
+      distanceFromCenter: 'Direct hillside riverfront',
+      amenities: ['Tiered Infinity Pool', 'Balinese Spa Pavilion', 'Floating Breakfast Included', 'Organic Farm-to-Table Dining'],
+      crowdScore: 'Ultra Secluded (97% Serenity)',
+      cancellation: 'Free cancellation up to 24h prior',
+      tag: 'Hidden Gem Stay'
+    },
+    {
+      id: 'hotel-amalfi-1',
+      destinationId: 'amalfi-italy',
+      name: 'Villa Maria Cliffside Suites Ravello',
+      type: 'Historic Cliffside Villa',
+      rating: 4.89,
+      reviewsCount: 295,
+      pricePerNightINR: 28000,
+      image: 'https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=800&q=80',
+      location: 'Ravello Heights, Amalfi Coast',
+      coordinates: [40.6489, 14.6112],
+      distanceFromCenter: 'Elevated 350m above crowded shores',
+      amenities: ['Lemon Grove Breakfast Patio', 'Infinity Jacuzzi', 'Private Balcony with Sea Panorama', 'Michelin Guide Restaurant'],
+      crowdScore: 'Romantic Sanctuary (88% Serenity)',
+      cancellation: 'Free cancellation up to 5 days prior',
+      tag: 'Breathtaking Views'
+    }
+  ],
+
+  // Flights Database
+  flights: [
+    {
+      id: 'fl-101',
+      airline: 'All Nippon Airways (ANA)',
+      flightNumber: 'NH 828',
+      logo: '✈️',
+      origin: 'DEL (New Delhi)',
+      destination: 'KIX (Osaka Kansai / Kyoto)',
+      departureTime: '20:00',
+      arrivalTime: '06:15 +1',
+      duration: '7h 45m',
+      stops: 'Non-stop',
+      priceINR: 42500,
+      cabinClass: 'Economy Premium',
+      carbonOffsetKg: 280,
+      baggage: '2 x 23kg Checked Baggage Included',
+      amenities: ['In-flight Japanese Meal', 'Wi-Fi Available', 'Extra Legroom'],
+      cancellation: 'Full refund within 24h of booking'
+    },
+    {
+      id: 'fl-102',
+      airline: 'Air France',
+      flightNumber: 'AF 225',
+      logo: '✈️',
+      origin: 'BOM (Mumbai)',
+      destination: 'CDG (Paris Charles de Gaulle)',
+      departureTime: '02:10',
+      arrivalTime: '08:05',
+      duration: '9h 25m',
+      stops: 'Non-stop',
+      priceINR: 52000,
+      cabinClass: 'Economy Smart',
+      carbonOffsetKg: 310,
+      baggage: '23kg Checked Baggage',
+      amenities: ['French Champagne & Croissant Service', 'Touchscreen Media', 'Fast USB-C Charging'],
+      cancellation: 'Free date change'
+    },
+    {
+      id: 'fl-103',
+      airline: 'IndiGo Airlines',
+      flightNumber: '6E 244',
+      logo: '✈️',
+      origin: 'DEL (New Delhi)',
+      destination: 'PNQ (Pune Lohegaon)',
+      departureTime: '07:45',
+      arrivalTime: '09:55',
+      duration: '2h 10m',
+      stops: 'Non-stop',
+      priceINR: 4800,
+      cabinClass: 'Economy',
+      carbonOffsetKg: 65,
+      baggage: '15kg Checked Baggage',
+      amenities: ['Direct Landing', 'Express Boarding'],
+      cancellation: 'Instant refund support'
+    }
+  ],
+
+  // Trains
+  trains: [
+    {
+      id: 'tr-1',
+      name: 'Shinkansen Nozomi Bullet Train',
+      route: 'Tokyo Central → Kyoto Station',
+      departureTime: '08:30 AM',
+      arrivalTime: '10:45 AM',
+      duration: '2h 15m',
+      classType: 'Green Car (First Class Panoramic)',
+      priceINR: 9800,
+      speed: '300 km/h',
+      amenities: ['Mount Fuji Vista Side Guaranteed', 'Silent Footrest Seats', 'High-Speed Wi-Fi'],
+      image: 'https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=600&q=80',
+      cancellation: '100% refund up to 2 hours prior'
+    },
+    {
+      id: 'tr-pune',
+      name: 'Deccan Queen Superfast Heritage Express',
+      route: 'Mumbai CSMT → Pune Junction (Scenic Bhor Ghat)',
+      departureTime: '05:10 PM',
+      arrivalTime: '08:25 PM',
+      duration: '3h 15m',
+      classType: 'Dining Car Executive Chair',
+      priceINR: 650,
+      speed: '110 km/h Scenic Mountain Pass',
+      amenities: ['Iconic Dining Car Omelettes & Baked Beans', 'Panoramic Western Ghat Vistas', 'Clean AC Coaches'],
+      image: 'https://images.unsplash.com/photo-1595658658481-d53d3f999875?auto=format&fit=crop&w=600&q=80',
+      cancellation: 'Free cancellation'
+    }
+  ],
+
+  // Buses & Shuttles
+  buses: [
+    {
+      id: 'bus-matheran',
+      name: 'Neral Hill Foothills Eco Shuttle',
+      operator: 'WanderAI Mountain Transit',
+      route: 'Neral Junction → Dasturi Point (Matheran Gate)',
+      departureTime: 'Every 20 mins',
+      arrivalTime: 'Flexible',
+      duration: '25 mins',
+      type: 'Mountain Eco Shuttle',
+      priceINR: 120,
+      amenities: ['AC Passenger Seating', 'Luggage Carrier', 'Direct Entry Ticket Integration'],
+      rating: 4.8,
+      cancellation: 'Instant booking'
+    }
+  ],
+
+  // Cars
+  cars: [
+    {
+      id: 'car-1',
+      model: 'Tesla Model Y Long Range (Electric AWD)',
+      category: 'Electric Luxury SUV',
+      transmission: 'Automatic',
+      seats: 5,
+      luggage: '3 Large Bags',
+      fuelType: '100% Electric (Free Supercharging)',
+      pricePerDayINR: 6500,
+      image: 'https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&w=600&q=80',
+      amenities: ['Autopilot', 'Panoramic Glass Roof', 'Unlimited KM'],
+      pickupLocation: 'Worldwide Major Hubs',
+      cancellation: 'Free cancellation up to 24h'
+    }
+  ],
+
+  // Activities & Experiences
+  activities: [
+    {
+      id: 'act-matheran-1',
+      destinationId: 'matheran-india',
+      title: 'Sunrise Horseback Trek to Panorama Point (360° Valley Clouds)',
+      category: 'Adventure',
+      duration: '3 hours',
+      rating: 4.95,
+      reviewsCount: 140,
+      priceINR: 1200,
+      crowdLevel: 10,
+      image: 'https://images.unsplash.com/photo-1589182373726-e4f658ab50f0?auto=format&fit=crop&w=800&q=80',
+      description: 'Ride gentle trained local horses along dense cedar and red clay canopies to the highest cliff lookout in Matheran.',
+      included: ['Equine Guide', 'Trekking Helmet', 'Fresh Organic Coconut Water', 'Photo Assistance'],
+      coordinates: [18.9950, 73.2710]
+    },
+    {
+      id: 'act-1',
+      destinationId: 'kyoto-japan',
+      title: 'Private Zen Tea Ceremony in 400-Year-Old Sub-Temple',
+      category: 'Culture',
+      duration: '2.5 hours',
+      rating: 4.98,
+      reviewsCount: 164,
+      priceINR: 4800,
+      crowdLevel: 10,
+      image: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=800&q=80',
+      description: 'Exclusive access to Daitoku-ji private garden with a licensed tea master. Learn matcha preparation without crowds.',
+      included: ['Matcha & Wagashi Sweets', 'Kimono Dressing', 'Private Tea Room'],
+      coordinates: [35.0441, 135.7462]
+    }
+  ],
+
+  // Restaurants & Dining
+  restaurants: [
+    {
+      id: 'rest-pune-1',
+      destinationId: 'pune-india',
+      name: 'Shabree Traditional Maharashtrian Thali & Bhakri',
+      cuisine: 'Authentic Maharashtrian Regional Feast',
+      rating: 4.92,
+      priceCategory: 'Budget-Friendly (₹450 / person)',
+      crowdLevel: 25,
+      specialty: 'Jowar Bhakri with Pithla, Thecha, Solkadhi & Puran Poli',
+      ambiance: 'Rustic brass dinnerware with live traditional hospitality',
+      image: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80',
+      coordinates: [18.5204, 73.8400]
+    },
+    {
+      id: 'rest-1',
+      destinationId: 'kyoto-japan',
+      name: 'Kikunoi Roan Annex (Hidden Courtyard Kaiseki)',
+      cuisine: 'Michelin 2-Star Kyoto Kaiseki',
+      rating: 4.96,
+      priceCategory: 'Luxury (₹6,500 / person)',
+      crowdLevel: 10,
+      specialty: 'Seasonal Bamboo Shoots with Grilled Ayu Sweetfish & Dashi',
+      ambiance: 'Private Tatami alcoves overlooking illuminated moss gardens',
+      image: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=600&q=80',
+      coordinates: [35.0034, 135.7725]
+    }
+  ]
+};
